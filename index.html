@@ -1,588 +1,655 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Losseni ZOURI — Data Analyst</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --white:    #FFFFFF;
-      --off:      #F8F7F4;
-      --stone:    #E8E4DC;
-      --mist:     #B8B2A8;
-      --ink:      #18160F;
-      --charcoal: #3A3830;
-      --accent:   #1A56DB;
-      --accent-lt:#EEF3FF;
-      --tag-txt:  #1A3A8F;
-      --green:    #22C55E;
-
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-body:    'Inter', system-ui, sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
-      --max: 1080px;
-      --r: 12px;
-      --ease: 0.25s ease;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      background: var(--white);
-      color: var(--ink);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 clamp(1.5rem, 5vw, 3rem);
-      height: 62px;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--stone);
-    }
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.85rem; font-weight: 500;
-      color: var(--charcoal); transition: color var(--ease);
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-      font-size: 0.82rem; font-weight: 600;
-      padding: 0.42rem 1rem; border-radius: 6px;
-      background: var(--accent); color: var(--white);
-      transition: opacity var(--ease);
-    }
-    .nav-cta:hover { opacity: 0.85; }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
-      padding: 0 clamp(1.5rem, 6vw, 5rem);
-      padding-top: 62px;
-      background: var(--off);
-      position: relative; overflow: hidden;
-    }
-    /* dotted grid — data identity */
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(circle, var(--stone) 1.5px, transparent 1.5px);
-      background-size: 36px 36px;
-      opacity: 0.7;
-      pointer-events: none;
-    }
-    .hero-text { position: relative; z-index: 1; }
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.72rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 600;
-      line-height: 1.05;
-      margin-bottom: 0.4rem;
-    }
-    .hero-name em { font-style: italic; color: var(--accent); font-weight: 300; }
-    .hero-subtitle {
-      font-family: var(--font-display);
-      font-style: italic; font-weight: 300;
-      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-      color: var(--charcoal);
-      margin-bottom: 1.75rem;
-    }
-    .hero-desc {
-      max-width: 480px;
-      font-size: 0.975rem; color: var(--charcoal);
-      line-height: 1.8; margin-bottom: 2.25rem;
-    }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.85rem; }
-    .btn-primary {
-      padding: 0.72rem 1.6rem; border-radius: var(--r);
-      background: var(--accent); color: var(--white);
-      font-weight: 600; font-size: 0.88rem;
-      transition: opacity var(--ease), transform var(--ease);
-    }
-    .btn-primary:hover { opacity: 0.87; transform: translateY(-1px); }
-    .btn-outline {
-      padding: 0.72rem 1.6rem; border-radius: var(--r);
-      border: 1.5px solid var(--stone); background: var(--white);
-      color: var(--charcoal); font-weight: 500; font-size: 0.88rem;
-      transition: border-color var(--ease), color var(--ease), transform var(--ease);
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      margin-top: 2.5rem; padding: 0.45rem 0.9rem;
-      border-radius: 999px; background: var(--white);
-      border: 1px solid var(--stone);
-      font-size: 0.77rem; color: var(--charcoal);
-    }
-    .dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--green); display: inline-block;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(1.4); }
-    }
-
-    /* Photo hero */
-    .hero-photo {
-      position: relative; z-index: 1;
-      display: flex; justify-content: center; align-items: center;
-    }
-    .photo-frame {
-      width: clamp(260px, 28vw, 360px);
-      height: clamp(320px, 35vw, 440px);
-      border-radius: 180px 180px 160px 160px;
-      overflow: hidden;
-      border: 4px solid var(--white);
-      box-shadow: 0 24px 60px rgba(26,86,219,0.14);
-      position: relative;
-    }
-    .photo-frame img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-    }
-    /* floating stat chips */
-    .chip {
-      position: absolute;
-      background: var(--white);
-      border: 1px solid var(--stone);
-      border-radius: 10px;
-      padding: 0.6rem 0.9rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      font-size: 0.78rem;
-      color: var(--charcoal);
-      white-space: nowrap;
-    }
-    .chip strong { display: block; font-size: 1.1rem; color: var(--ink); font-weight: 600; }
-    .chip-1 { bottom: 10%; left: -40px; }
-    .chip-2 { top: 12%; right: -50px; }
-
-    /* ── SECTIONS COMMONS ── */
-    section { padding: clamp(4rem, 7vw, 6.5rem) clamp(1.5rem, 5vw, 3rem); }
-    .section-inner { max-width: var(--max); margin: 0 auto; }
-    .section-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.7rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-      font-weight: 600; line-height: 1.15;
-      margin-bottom: 3rem;
-    }
-    .section-title em { font-style: italic; color: var(--accent); font-weight: 300; }
-
-    /* ── ABOUT ── */
-    #about { background: var(--white); }
-    .about-grid {
-      display: grid; grid-template-columns: 1.1fr 0.9fr;
-      gap: 4rem; align-items: start;
-    }
-    .about-text p {
-      font-size: 0.975rem; color: var(--charcoal);
-      line-height: 1.85; margin-bottom: 1.1rem;
-    }
-    .about-text p strong { color: var(--ink); }
-    .about-cols {
-      display: flex; flex-direction: column; gap: 1rem;
-    }
-    .about-item {
-      padding: 1.2rem 1.4rem;
-      border-radius: var(--r);
-      background: var(--off);
-      border-left: 3px solid var(--accent);
-    }
-    .about-item h4 {
-      font-size: 0.72rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--accent); margin-bottom: 0.35rem;
-    }
-    .about-item p { font-size: 0.875rem; color: var(--charcoal); line-height: 1.6; }
-
-    /* ── SKILLS ── */
-    #skills { background: var(--off); }
-    .skills-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-    }
-    .skill-card {
-      background: var(--white); border-radius: var(--r);
-      border: 1px solid var(--stone); padding: 1.6rem;
-      transition: border-color var(--ease), transform var(--ease);
-    }
-    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .skill-icon {
-      width: 38px; height: 38px; border-radius: 9px;
-      background: var(--accent-lt); display: flex;
-      align-items: center; justify-content: center;
-      font-size: 1.15rem; margin-bottom: 0.9rem;
-    }
-    .skill-card h3 {
-      font-size: 0.875rem; font-weight: 600;
-      color: var(--ink); margin-bottom: 0.7rem;
-    }
-    .skill-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
-    .skill-card li {
-      font-size: 0.82rem; color: var(--charcoal);
-      padding-left: 0.9rem; position: relative;
-    }
-    .skill-card li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-
-    /* ── PROJECTS ── */
-    #projects { background: var(--white); }
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-    }
-    .project-card {
-      border-radius: var(--r); border: 1px solid var(--stone);
-      overflow: hidden; display: flex; flex-direction: column;
-      background: var(--white);
-      transition: box-shadow var(--ease), transform var(--ease);
-    }
-    .project-card:hover { box-shadow: 0 8px 36px rgba(26,86,219,0.1); transform: translateY(-4px); }
-    .project-card.soon { opacity: 0.6; }
-    .project-thumb {
-      height: 140px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem;
-    }
-    .thumb-sql   { background: linear-gradient(135deg, #EEF3FF, #DBEAFE); }
-    .thumb-stat  { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
-    .thumb-coming { background: var(--stone); }
-    .project-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
-    .project-type {
-      font-family: var(--font-mono); font-size: 0.66rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 0.45rem;
-    }
-    .project-title {
-      font-family: var(--font-display); font-weight: 600;
-      font-size: 1.05rem; color: var(--ink); margin-bottom: 0.55rem;
-    }
-    .project-desc {
-      font-size: 0.845rem; color: var(--charcoal);
-      line-height: 1.65; flex: 1; margin-bottom: 1rem;
-    }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.1rem; }
-    .tag {
-      font-family: var(--font-mono); font-size: 0.67rem;
-      padding: 0.18rem 0.55rem; border-radius: 4px;
-      background: var(--accent-lt); color: var(--tag-txt);
-    }
-
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--off); }
-    .exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
-    .exp-item {
-      display: grid; grid-template-columns: 140px 1fr;
-      gap: 2rem; align-items: start;
-      padding: 1.5rem; border-radius: var(--r);
-      background: var(--white); border: 1px solid var(--stone);
-      transition: border-color var(--ease);
-    }
-    .exp-item:hover { border-color: var(--accent); }
-    .exp-date {
-      font-family: var(--font-mono); font-size: 0.72rem;
-      color: var(--mist); padding-top: 0.1rem;
-    }
-    .exp-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; }
-    .exp-org {
-      font-size: 0.83rem; color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    .exp-desc { font-size: 0.845rem; color: var(--charcoal); line-height: 1.65; }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--white); }
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1.35fr;
-      gap: 4rem; align-items: start;
-    }
-    .contact-info p {
-      font-size: 0.975rem; color: var(--charcoal);
-      line-height: 1.8; margin-bottom: 2rem;
-    }
-    .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
-    .contact-link {
-      display: flex; align-items: center; gap: 0.7rem;
-      font-size: 0.875rem; color: var(--charcoal);
-      transition: color var(--ease);
-    }
-    .contact-link:hover { color: var(--accent); }
-    .contact-link .ico {
-      width: 34px; height: 34px; border-radius: 8px;
-      background: var(--off); border: 1px solid var(--stone);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem; flex-shrink: 0;
-    }
-
-    /* Form */
-    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
-    .form-group label { font-size: 0.78rem; font-weight: 500; color: var(--charcoal); }
-    .form-group input,
-    .form-group textarea {
-      padding: 0.65rem 0.9rem; border-radius: 8px;
-      border: 1.5px solid var(--stone); background: var(--off);
-      font-family: var(--font-body); font-size: 0.875rem;
-      color: var(--ink); outline: none;
-      transition: border-color var(--ease), background var(--ease);
-    }
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--accent); background: var(--white); }
-    .form-group textarea { min-height: 120px; resize: vertical; }
-    .btn-submit {
-      padding: 0.8rem; border-radius: 8px; border: none;
-      background: var(--accent); color: var(--white);
-      font-family: var(--font-body); font-size: 0.875rem; font-weight: 600;
-      cursor: pointer; transition: opacity var(--ease);
-    }
-    .btn-submit:hover { opacity: 0.87; }
-    #form-success {
-      display: none; padding: 0.9rem; border-radius: 8px;
-      background: #DCFCE7; color: #166534;
-      font-size: 0.84rem; text-align: center;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 1.75rem clamp(1.5rem, 5vw, 3rem);
-      border-top: 1px solid var(--stone);
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 1rem;
-      font-size: 0.78rem; color: var(--mist);
-    }
-    footer a { color: var(--mist); transition: color var(--ease); }
-    footer a:hover { color: var(--accent); }
-
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      #hero { grid-template-columns: 1fr; padding-top: 80px; }
-      .hero-photo { display: none; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .projects-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 580px) {
-      .nav-links { display: none; }
-      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Losseni ZOURI — Data Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ── TOKENS ──────────────────────────────────────── */
+:root {
+  --white:   #FFFFFF;
+  --bg:      #F5F4F1;
+  --border:  #E2DDD6;
+  --mist:    #A09A91;
+  --ink:     #111010;
+  --body:    #3D3A35;
+  --sub:     #5C5850;
+  --blue:    #1B4FD8;
+  --blue-lt: #EBF0FF;
+  --blue-dk: #1540B0;
+ 
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --max:   1080px;
+  --ease:  0.22s ease;
+}
+ 
+/* ── RESET ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; }
+ 
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-wordmark {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+.nav-wordmark span { color: var(--blue); }
+.nav-links { display: flex; gap: 2.25rem; }
+.nav-links a {
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--sub);
+  transition: color var(--ease);
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-contact {
+  font-size: 0.8rem; font-weight: 600;
+  padding: 0.4rem 1.1rem; border-radius: 4px;
+  background: var(--blue); color: var(--white);
+  transition: background var(--ease);
+}
+.nav-contact:hover { background: var(--blue-dk); }
+ 
+/* ── HERO ────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 0;
+  padding-top: 60px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+/* Signature: vertical data-column line */
+#hero::before {
+  content: '';
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 60px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border) 15%, var(--border) 85%, transparent);
+  pointer-events: none;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  padding-right: 4rem;
+}
+.hero-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 2rem;
+}
+.hero-label::before {
+  content: '';
+  display: block; width: 24px; height: 1.5px;
+  background: var(--blue);
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1.02;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--blue);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+  color: var(--sub);
+  margin-bottom: 2rem;
+}
+.hero-desc {
+  font-size: 1rem; color: var(--body);
+  line-height: 1.8; max-width: 440px;
+  margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+.btn {
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em;
+  padding: 0.7rem 1.5rem; border-radius: 4px;
+  transition: background var(--ease), color var(--ease), border-color var(--ease), transform var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-blue { background: var(--blue); color: var(--white); }
+.btn-blue:hover { background: var(--blue-dk); }
+.btn-ghost { background: transparent; color: var(--body); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+ 
+.hero-status {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  margin-top: 2.5rem;
+  font-size: 0.78rem; color: var(--sub);
+}
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #22C55E;
+  animation: blink 2.4s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.35} }
+ 
+/* Hero right — photo */
+.hero-right {
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 0;
+  background: var(--bg);
+  position: relative;
+}
+.hero-photo-wrap {
+  width: 100%; height: 100%;
+  position: relative; overflow: hidden;
+}
+.hero-photo-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+}
+.hero-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--white) 0%, transparent 18%);
+}
+.hero-stat-card {
+  position: absolute;
+  bottom: 2.5rem; left: -1.5rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  font-size: 0.78rem; color: var(--sub);
+  white-space: nowrap;
+}
+.hero-stat-card strong {
+  display: block; font-family: var(--serif);
+  font-size: 1.5rem; color: var(--ink); line-height: 1.1; margin-bottom: 0.1rem;
+}
+ 
+/* ── SECTION COMMONS ─────────────────────────────── */
+section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+.inner { max-width: var(--max); margin: 0 auto; }
+.eyebrow {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 0.65rem;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+  line-height: 1.12; color: var(--ink);
+  margin-bottom: 3rem;
+}
+.section-title em { font-style: italic; color: var(--blue); }
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+ 
+/* ── ABOUT ───────────────────────────────────────── */
+#about { background: var(--white); }
+.about-layout {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 5rem; align-items: start;
+}
+.about-body p {
+  font-size: 0.975rem; color: var(--body); line-height: 1.85; margin-bottom: 1rem;
+}
+.about-body p:last-child { margin-bottom: 0; }
+.about-body strong { color: var(--ink); font-weight: 600; }
+.about-cards { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.about-card {
+  padding: 1.1rem 1.3rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--ease);
+}
+.about-card:last-child { border-bottom: none; }
+.about-card:hover { background: var(--bg); }
+.about-card-label {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 0.3rem;
+}
+.about-card-val { font-size: 0.875rem; color: var(--body); line-height: 1.5; }
+ 
+/* ── SKILLS ──────────────────────────────────────── */
+#skills { background: var(--bg); }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.skill-block {
+  padding: 2rem 1.75rem;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  transition: background var(--ease);
+}
+.skill-block:last-child { border-right: none; }
+.skill-block:hover { background: var(--bg); }
+.skill-block-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 1rem;
+}
+.skill-block h3 {
+  font-family: var(--serif); font-size: 1.05rem;
+  color: var(--ink); margin-bottom: 1.2rem;
+}
+.skill-items { display: flex; flex-direction: column; gap: 0.4rem; }
+.skill-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.845rem; color: var(--body);
+}
+.skill-item::before {
+  content: '';
+  flex-shrink: 0;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--blue);
+}
+ 
+/* ── PROJECTS ────────────────────────────────────── */
+#projects { background: var(--white); }
+.projects-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.project-row {
+  display: grid; grid-template-columns: 260px 1fr auto;
+  gap: 0; align-items: stretch;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--ease);
+}
+.project-row:last-child { border-bottom: none; }
+.project-row:hover { background: var(--bg); }
+.project-row.soon { opacity: 0.55; }
+ 
+.project-meta {
+  padding: 1.75rem 2rem;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.project-type {
+  font-size: 0.67rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
+}
+.project-name {
+  font-family: var(--serif); font-size: 1.1rem;
+  color: var(--ink); line-height: 1.25;
+}
+.project-orgs {
+  margin-top: 0.6rem;
+  display: flex; flex-direction: column; gap: 0.2rem;
+}
+.project-org {
+  font-size: 0.75rem; color: var(--mist);
+}
+ 
+.project-content {
+  padding: 1.75rem 2rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.project-desc {
+  font-size: 0.875rem; color: var(--body);
+  line-height: 1.7; margin-bottom: 1rem;
+}
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.04em;
+  padding: 0.22rem 0.7rem; border-radius: 3px;
+  background: var(--blue-lt); color: var(--blue);
+  border: 1px solid #C7D7FA;
+}
+ 
+.project-action {
+  padding: 1.75rem 2rem;
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
+}
+.project-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 600;
+  padding: 0.55rem 1rem; border-radius: 4px;
+  border: 1.5px solid var(--blue); color: var(--blue);
+  white-space: nowrap;
+  transition: background var(--ease), color var(--ease);
+}
+.project-btn:hover { background: var(--blue); color: var(--white); }
+.project-btn svg { width: 12px; height: 12px; }
+.project-soon-label {
+  font-size: 0.72rem; color: var(--mist);
+  text-align: center;
+}
+ 
+/* ── EXPERIENCE ──────────────────────────────────── */
+#experience { background: var(--bg); }
+.exp-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.exp-row {
+  display: grid; grid-template-columns: 160px 1fr;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--ease);
+}
+.exp-row:last-child { border-bottom: none; }
+.exp-row:hover { background: var(--bg); }
+.exp-date-col {
+  padding: 1.5rem 1.75rem;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: flex-start;
+}
+.exp-date {
+  font-size: 0.75rem; font-weight: 500; color: var(--mist);
+  font-family: var(--sans);
+}
+.exp-body { padding: 1.5rem 1.75rem; }
+.exp-title { font-weight: 600; font-size: 0.925rem; color: var(--ink); margin-bottom: 0.2rem; }
+.exp-org { font-size: 0.8rem; color: var(--blue); margin-bottom: 0.6rem; }
+.exp-desc { font-size: 0.845rem; color: var(--body); line-height: 1.65; }
+ 
+/* ── CONTACT ─────────────────────────────────────── */
+#contact { background: var(--white); }
+.contact-layout {
+  display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start;
+}
+.contact-intro p {
+  font-size: 0.975rem; color: var(--body);
+  line-height: 1.8; margin-bottom: 2rem;
+}
+.contact-details { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.contact-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  font-size: 0.875rem; color: var(--body);
+  transition: background var(--ease), color var(--ease);
+}
+.contact-item:last-child { border-bottom: none; }
+.contact-item:hover { background: var(--bg); color: var(--blue); }
+.contact-item-icon {
+  flex-shrink: 0; width: 32px; height: 32px;
+  border-radius: 4px; border: 1px solid var(--border);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-item-icon svg { width: 14px; height: 14px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+ 
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 0.85rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--sub); }
+.form-group input, .form-group textarea {
+  padding: 0.65rem 0.9rem;
+  border-radius: 4px; border: 1.5px solid var(--border);
+  background: var(--bg); font-family: var(--sans);
+  font-size: 0.875rem; color: var(--ink); outline: none;
+  transition: border-color var(--ease), background var(--ease);
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--blue); background: var(--white);
+}
+.form-group textarea { min-height: 120px; resize: vertical; }
+.btn-submit {
+  padding: 0.75rem; border-radius: 4px; border: none;
+  background: var(--blue); color: var(--white);
+  font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 0.03em; cursor: pointer;
+  transition: background var(--ease);
+}
+.btn-submit:hover { background: var(--blue-dk); }
+#form-ok {
+  display: none; padding: 0.85rem; border-radius: 4px;
+  background: #DCFCE7; color: #166534;
+  font-size: 0.83rem; text-align: center; border: 1px solid #BBF7D0;
+}
+ 
+/* ── FOOTER ──────────────────────────────────────── */
+footer {
+  padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+  font-size: 0.75rem; color: var(--mist);
+}
+footer a { color: var(--mist); transition: color var(--ease); }
+footer a:hover { color: var(--blue); }
+.footer-links { display: flex; gap: 1.5rem; }
+ 
+/* ── REVEAL ──────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.in { opacity: 1; transform: none; }
+ 
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 980px) {
+  #hero { grid-template-columns: 1fr; }
+  #hero::before { display: none; }
+  .hero-right { display: none; }
+  .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .skill-block { border-right: none; border-bottom: 1px solid var(--border); }
+  .skill-block:last-child { border-bottom: none; }
+  .project-row { grid-template-columns: 1fr; }
+  .project-meta { border-right: none; border-bottom: 1px solid var(--border); }
+  .project-action { border-left: none; border-top: 1px solid var(--border); flex-direction: row; justify-content: flex-start; }
+  .exp-row { grid-template-columns: 1fr; }
+  .exp-date-col { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">LZ.</span>
+  <span class="nav-wordmark">Losseni <span>ZOURI</span></span>
   <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
+    <li><a href="#about">Profil</a></li>
     <li><a href="#skills">Compétences</a></li>
     <li><a href="#projects">Projets</a></li>
     <li><a href="#experience">Expériences</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="mailto:losseni.zouri@etu.u-paris.fr">Me contacter</a>
+  <a class="nav-contact" href="mailto:losseni.zouri@etu.u-paris.fr">Contactez-moi</a>
 </nav>
-
+ 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Data Analytics · SQL · Power BI · Visualisation</p>
-    <h1 class="hero-name">Losseni <em>ZOURI</em></h1>
-    <p class="hero-subtitle">Data Analyst en devenir</p>
+  <div class="hero-left">
+    <p class="hero-label">Data Analytics &amp; Science des Données</p>
+    <h1 class="hero-name">Losseni<br/><em>ZOURI</em></h1>
+    <p class="hero-title">Data Analyst en devenir</p>
     <p class="hero-desc">
-      Étudiant en 2ème année de BUT Science des Données — parcours EMS — à l'Université Paris Cité.
-      Je transforme les données brutes en informations actionnables, avec rigueur et méthode.
+      Étudiant en 2e année de BUT Science des Données — parcours EMS —
+      à l'IUT de Paris, Rives de Seine. Je transforme les données brutes
+      en informations actionnables, avec rigueur et méthode.
     </p>
-    <div class="hero-ctas">
-      <a class="btn-primary" href="#projects">Voir mes projets</a>
-      <a class="btn-outline" href="#contact">Me contacter</a>
+    <div class="hero-actions">
+      <a class="btn btn-blue" href="#projects">Voir mes projets</a>
+      <a class="btn btn-ghost" href="#contact">Me contacter</a>
     </div>
-    <div class="hero-badge">
-      <span class="dot"></span>
-      Disponible en alternance · Île-de-France
-    </div>
+    <p class="hero-status">
+      <span class="status-dot"></span>
+      Disponible en alternance — Île-de-France
+    </p>
   </div>
-
-  <div class="hero-photo">
-    <div style="position:relative; display:inline-block;">
-      <div class="photo-frame">
-        <img src="photo.png" alt="Losseni ZOURI" />
-      </div>
-      <div class="chip chip-1">
-        <strong>2</strong> projets universitaires
-      </div>
-      <div class="chip chip-2">
-        <strong>BUT</strong> Science des Données
-      </div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <img src="photo.png" alt="Losseni ZOURI" />
+      <div class="hero-photo-overlay"></div>
+    </div>
+    <div class="hero-stat-card">
+      <strong>BUT SD</strong>
+      Parcours EMS · Université Paris Cité
     </div>
   </div>
 </section>
-
+ 
+<hr class="divider" />
+ 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">01 — À propos</p>
+  <div class="inner">
+    <p class="eyebrow reveal">Profil</p>
     <h2 class="section-title reveal">Analytique <em>par nature.</em></h2>
-    <div class="about-grid">
-      <div class="about-text reveal">
+    <div class="about-layout">
+      <div class="about-body reveal">
         <p>
-          Étudiant en 2ème année de <strong>BUT Science des Données — parcours Exploration et Modélisation Statistique (EMS)</strong>
-          à l'IUT de Paris, Rives de Seine — Université Paris Cité, je construis des compétences solides
-          en analyse statistique, gestion de bases de données et visualisation de données.
+          Étudiant en 2e année de <strong>BUT Science des Données — parcours
+          Exploration et Modélisation Statistique (EMS)</strong> à l'IUT de Paris,
+          Rives de Seine — Université Paris Cité, je construis des compétences
+          solides en analyse statistique, gestion de bases de données et
+          visualisation de données.
         </p>
         <p>
-          Mon approche est avant tout <strong>analytique et orientée décision</strong> : partir d'une question
-          métier, explorer les données, identifier des tendances et restituer des résultats clairs
-          et exploitables par les équipes.
+          Mon approche est <strong>analytique et orientée décision</strong> : partir
+          d'une question métier, explorer les données, identifier des tendances
+          et restituer des résultats clairs et exploitables.
         </p>
         <p>
-          Délégué de mon groupe depuis la 1ère année, j'ai développé une vraie capacité d'écoute,
-          de synthèse et de communication face à des responsables pédagogiques — des compétences
-          directement transposables en environnement professionnel.
+          Délégué de mon groupe depuis la 1re année, j'ai développé une capacité
+          d'écoute, de synthèse et de communication face à des responsables
+          pédagogiques — des compétences directement transposables en
+          environnement professionnel.
         </p>
       </div>
-      <div class="about-cols reveal">
-        <div class="about-item">
-          <h4>Formation</h4>
-          <p>BUT Science des Données · Parcours EMS<br/>IUT de Paris, Rives de Seine — Université Paris Cité · 2025–2028</p>
+      <div class="about-cards reveal">
+        <div class="about-card">
+          <p class="about-card-label">Formation</p>
+          <p class="about-card-val">BUT Science des Données · Parcours EMS<br/>IUT de Paris, Rives de Seine — Université Paris Cité · 2025–2028</p>
         </div>
-        <div class="about-item">
-          <h4>Baccalauréat</h4>
-          <p>STMG · Spécialité Systèmes d'information et de gestion<br/>Mention Bien — Lycée Louis Armand, Paris 15e</p>
+        <div class="about-card">
+          <p class="about-card-label">Baccalauréat</p>
+          <p class="about-card-val">STMG · Systèmes d'information et de gestion<br/>Mention Bien — Lycée Louis Armand, Paris 15e</p>
         </div>
-        <div class="about-item">
-          <h4>Langues</h4>
-          <p>Français (natif) · Anglais B2</p>
+        <div class="about-card">
+          <p class="about-card-label">Langues</p>
+          <p class="about-card-val">Français (natif) · Anglais B2</p>
         </div>
-        <div class="about-item">
-          <h4>Loisirs</h4>
-          <p>Musculation · Lecture · Musique</p>
+        <div class="about-card">
+          <p class="about-card-label">Centres d'intérêt</p>
+          <p class="about-card-val">Musculation · Lecture · Musique</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
+ 
+<hr class="divider" />
+ 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">02 — Compétences</p>
-    <h2 class="section-title reveal">Stack & <em>savoir-faire.</em></h2>
-    <div class="skills-grid">
-
-      <div class="skill-card reveal">
-        <div class="skill-icon">📊</div>
-        <h3>Statistiques & Décisionnel</h3>
-        <ul>
-          <li>Analyse statistique univariée & bivariée</li>
-          <li>Exploitation et interprétation de données</li>
-          <li>Requêtage et gestion de bases de données</li>
-          <li>Reporting et visualisation de données</li>
-        </ul>
+  <div class="inner">
+    <p class="eyebrow reveal">Compétences</p>
+    <h2 class="section-title reveal">Stack &amp; <em>savoir-faire.</em></h2>
+    <div class="skills-grid reveal">
+ 
+      <div class="skill-block">
+        <p class="skill-block-label">01</p>
+        <h3>Statistiques &amp; Décisionnel</h3>
+        <div class="skill-items">
+          <p class="skill-item">Analyse statistique univariée &amp; bivariée</p>
+          <p class="skill-item">Exploitation et interprétation de données</p>
+          <p class="skill-item">Requêtage et gestion de bases de données</p>
+          <p class="skill-item">Reporting et visualisation de données</p>
+        </div>
       </div>
-
-      <div class="skill-card reveal">
-        <div class="skill-icon">🛠️</div>
-        <h3>Outils & Langages</h3>
-        <ul>
-          <li>SQL</li>
-          <li>Power BI</li>
-          <li>Excel (avancé) · PowerPoint</li>
-          <li>Python & R (notions)</li>
-          <li>SAS</li>
-          <li>Lime Survey</li>
-        </ul>
+ 
+      <div class="skill-block">
+        <p class="skill-block-label">02</p>
+        <h3>Outils &amp; Langages</h3>
+        <div class="skill-items">
+          <p class="skill-item">SQL</p>
+          <p class="skill-item">Power BI</p>
+          <p class="skill-item">Excel (avancé) · PowerPoint</p>
+          <p class="skill-item">Python · R (notions)</p>
+          <p class="skill-item">SAS · Lime Survey</p>
+        </div>
       </div>
-
-      <div class="skill-card reveal">
-        <div class="skill-icon">🤝</div>
+ 
+      <div class="skill-block">
+        <p class="skill-block-label">03</p>
         <h3>Compétences transverses</h3>
-        <ul>
-          <li>Bonne communication</li>
-          <li>Rigueur & méthode analytique</li>
-          <li>Travail en équipe</li>
-          <li>Anglais B2</li>
-          <li>Délégué de groupe</li>
-        </ul>
+        <div class="skill-items">
+          <p class="skill-item">Rigueur &amp; méthode analytique</p>
+          <p class="skill-item">Communication orale et écrite</p>
+          <p class="skill-item">Travail en équipe</p>
+          <p class="skill-item">Anglais B2</p>
+          <p class="skill-item">Délégué de groupe</p>
+        </div>
       </div>
-
+ 
     </div>
   </div>
 </section>
-
+ 
+<hr class="divider" />
+ 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">03 — Projets</p>
+  <div class="inner">
+    <p class="eyebrow reveal">Projets</p>
     <h2 class="section-title reveal">Ce que j'ai <em>construit.</em></h2>
-    <div class="projects-grid">
-
-      <!-- Projet 1 : Sakila -->
-      <div class="project-card reveal">
-        <div class="project-thumb thumb-sql">🗃️</div>
-        <div class="project-body">
-          <p class="project-type">Universitaire</p>
-          <h3 class="project-title">Analyse SQL — Base Sakila</h3>
-          <p class="project-desc">
-            Extraction et préparation des données d'un loueur de DVD fictif via des requêtes SQL avancées.
-            Analyse des comportements clients et des tendances de location. Reporting des performances
-            et recommandations opérationnelles (horaires, catégories à mettre en avant).
-          </p>
-          <div class="project-tags">
-            <span class="tag">SQL</span>
-            <span class="tag">Excel</span>
-            <span class="tag">Reporting</span>
+    <div class="projects-list reveal">
+ 
+      <!-- Projet 1 -->
+      <div class="project-row">
+        <div class="project-meta">
+          <p class="project-type">SAE · Challenge national</p>
+          <p class="project-name">Challenge Dataviz 2026</p>
+          <div class="project-orgs">
+            <p class="project-org">Université Paris Cité</p>
+            <p class="project-org">INSEE</p>
           </div>
         </div>
-      </div>
-
-      <!-- Projet 2 : Enquête culturelle -->
-      <div class="project-card reveal">
-        <div class="project-thumb thumb-stat">📋</div>
-        <div class="project-body">
-          <p class="project-type">Universitaire — IUT de Paris</p>
-          <h3 class="project-title">Enquête — Pratiques culturelles étudiantes</h3>
+        <div class="project-content">
           <p class="project-desc">
-            Enquête complète sur les pratiques culturelles des étudiants de l'IUT. Conception du questionnaire
-            sous Lime Survey, nettoyage de la base de données, analyses statistiques univariées et bivariées
-            sous Excel, et présentation orale des résultats avec datavisualisations.
+            Infographie réalisée en une journée sur l'évolution démographique
+            des 18 régions françaises entre 2016 et 2022. Analyse des données
+            INSEE, construction d'un dashboard Power BI comparatif et
+            cartographique en équipe de 4.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+            <span class="tag">INSEE</span>
+            <span class="tag">Datavisualisation</span>
+          </div>
+        </div>
+        <div class="project-action">
+          <a class="project-btn" href="projet_dataviz.html">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Voir le rapport
+          </a>
+        </div>
+      </div>
+ 
+      <!-- Projet 2 -->
+      <div class="project-row">
+        <div class="project-meta">
+          <p class="project-type">SAE · Universitaire</p>
+          <p class="project-name">Enquête — Pratiques culturelles étudiantes</p>
+          <div class="project-orgs">
+            <p class="project-org">Université Paris Cité</p>
+          </div>
+        </div>
+        <div class="project-content">
+          <p class="project-desc">
+            Enquête complète sur les pratiques culturelles des étudiants de
+            l'IUT. Conception du questionnaire sous Lime Survey, nettoyage
+            de la base de données, analyses statistiques univariées et bivariées
+            sous Excel, restitution orale avec datavisualisations.
           </p>
           <div class="project-tags">
             <span class="tag">Excel</span>
@@ -591,148 +658,186 @@
             <span class="tag">Datavisualisation</span>
           </div>
         </div>
-      </div>
-
-      <!-- Placeholder -->
-      <div class="project-card soon reveal">
-        <div class="project-thumb thumb-coming">⏳</div>
-        <div class="project-body">
-          <p class="project-type">Bientôt disponible</p>
-          <h3 class="project-title">Prochain projet</h3>
-          <p class="project-desc">Un nouveau projet est en cours de réalisation. Il sera ajouté ici prochainement.</p>
-          <div class="project-tags">
-            <span class="tag">À venir</span>
-          </div>
+        <div class="project-action">
+          <p class="project-soon-label">Rapport<br/>à venir</p>
         </div>
       </div>
-
+ 
+      <!-- Placeholder -->
+      <div class="project-row soon">
+        <div class="project-meta">
+          <p class="project-type">En cours</p>
+          <p class="project-name">Prochain projet</p>
+        </div>
+        <div class="project-content">
+          <p class="project-desc">Un nouveau projet est en cours de réalisation. Il sera publié prochainement.</p>
+          <div class="project-tags"><span class="tag">À venir</span></div>
+        </div>
+        <div class="project-action">
+          <p class="project-soon-label">Bientôt<br/>disponible</p>
+        </div>
+      </div>
+ 
     </div>
   </div>
 </section>
-
+ 
+<hr class="divider" />
+ 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">04 — Expériences</p>
+  <div class="inner">
+    <p class="eyebrow reveal">Expériences</p>
     <h2 class="section-title reveal">Parcours <em>professionnel.</em></h2>
-    <div class="exp-list">
-
-      <div class="exp-item reveal">
-        <span class="exp-date">Fév. 2024</span>
-        <div>
+    <div class="exp-list reveal">
+ 
+      <div class="exp-row">
+        <div class="exp-date-col">
+          <p class="exp-date">Fév. 2024</p>
+        </div>
+        <div class="exp-body">
           <p class="exp-title">Technicien d'Escale Commerciale — Stage</p>
-          <p class="exp-org">Air France · Roissy Charles de Gaulle</p>
-          <p class="exp-desc">Travail en équipe dans un environnement opérationnel exigeant. Enregistrement des bagages, développement de solutions et gestion des situations imprévues.</p>
+          <p class="exp-org">Air France · Roissy-Charles-de-Gaulle</p>
+          <p class="exp-desc">Travail en équipe dans un environnement opérationnel exigeant. Enregistrement des bagages, gestion des situations imprévues et développement de solutions en temps réel.</p>
         </div>
       </div>
-
-      <div class="exp-item reveal">
-        <span class="exp-date">Fév. 2024</span>
-        <div>
+ 
+      <div class="exp-row">
+        <div class="exp-date-col">
+          <p class="exp-date">Fév. 2024</p>
+        </div>
+        <div class="exp-body">
           <p class="exp-title">Assistant du Directeur Délégué à la Formation Professionnelle — Stage</p>
           <p class="exp-org">Lycée Louis Armand · Paris 15e</p>
           <p class="exp-desc">Participation à l'organisation de la Journée Portes Ouvertes. Communication et mise en relation des élèves en situation de handicap avec Air France.</p>
         </div>
       </div>
-
-      <div class="exp-item reveal">
-        <span class="exp-date">2025 – présent</span>
-        <div>
+ 
+      <div class="exp-row">
+        <div class="exp-date-col">
+          <p class="exp-date">2025 — présent</p>
+        </div>
+        <div class="exp-body">
           <p class="exp-title">Délégué de groupe</p>
           <p class="exp-org">IUT de Paris, Rives de Seine — Université Paris Cité</p>
-          <p class="exp-desc">Représentation du groupe auprès de l'équipe pédagogique. Recueil et synthèse des retours étudiants, prise de parole en conseil de département face aux responsables de la formation.</p>
+          <p class="exp-desc">Représentation du groupe auprès de l'équipe pédagogique. Recueil et synthèse des retours étudiants, prise de parole en conseil de département.</p>
         </div>
       </div>
-
+ 
     </div>
   </div>
 </section>
-
+ 
+<hr class="divider" />
+ 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">05 — Contact</p>
+  <div class="inner">
+    <p class="eyebrow reveal">Contact</p>
     <h2 class="section-title reveal">Travaillons <em>ensemble.</em></h2>
-    <div class="contact-grid">
-      <div class="contact-info reveal">
+    <div class="contact-layout">
+ 
+      <div class="contact-intro reveal">
         <p>
-          Disponible en alternance sur l'Île-de-France. N'hésitez pas à me contacter
-          pour toute opportunité, collaboration ou question.
+          Disponible en alternance sur l'Île-de-France à partir de septembre 2026.
+          N'hésitez pas à me contacter pour toute opportunité ou collaboration.
         </p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:losseni.zouri@etu.u-paris.fr">
-            <span class="ico">✉️</span>
+        <div class="contact-details">
+          <a class="contact-item" href="mailto:losseni.zouri@etu.u-paris.fr">
+            <span class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            </span>
             losseni.zouri@etu.u-paris.fr
           </a>
-          <a class="contact-link" href="https://www.linkedin.com/in/losseni-zouri-160716253/" target="_blank" rel="noopener">
-            <span class="ico">💼</span>
+          <a class="contact-item" href="tel:+33745995084">
+            <span class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.01z"/></svg>
+            </span>
+            07 45 99 50 84
+          </a>
+          <a class="contact-item" href="https://www.linkedin.com/in/losseni-zouri-160716253/" target="_blank" rel="noopener">
+            <span class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </span>
             LinkedIn — Losseni ZOURI
           </a>
-          <a class="contact-link" href="https://github.com/Losseni-ZOURI" target="_blank" rel="noopener">
-            <span class="ico">🐙</span>
+          <a class="contact-item" href="https://github.com/Losseni-ZOURI" target="_blank" rel="noopener">
+            <span class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </span>
             GitHub — Losseni-ZOURI
           </a>
         </div>
       </div>
-
+ 
       <div class="reveal">
-        <form class="contact-form" onsubmit="handleSubmit(event)">
+        <form class="contact-form" onsubmit="sendMsg(event)">
           <div class="form-row">
             <div class="form-group">
-              <label for="name">Nom</label>
-              <input type="text" id="name" placeholder="Votre nom" required />
+              <label for="c-name">Nom</label>
+              <input type="text" id="c-name" placeholder="Votre nom" required />
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" placeholder="votre@email.com" required />
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" placeholder="votre@email.com" required />
             </div>
           </div>
           <div class="form-group">
-            <label for="subject">Sujet</label>
-            <input type="text" id="subject" placeholder="Objet de votre message" />
+            <label for="c-subject">Sujet</label>
+            <input type="text" id="c-subject" placeholder="Objet de votre message" />
           </div>
           <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="Votre message..." required></textarea>
+            <label for="c-msg">Message</label>
+            <textarea id="c-msg" placeholder="Votre message..." required></textarea>
           </div>
           <button class="btn-submit" type="submit">Envoyer le message</button>
-          <div id="form-success">✓ Message envoyé ! Je vous répondrai dans les plus brefs délais.</div>
+          <div id="form-ok">Message envoyé — je vous répondrai dans les meilleurs délais.</div>
         </form>
       </div>
+ 
     </div>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <span>© 2026 Losseni ZOURI — BUT Science des Données · Université Paris Cité</span>
-  <div style="display:flex;gap:1.5rem;">
+  <nav class="footer-links">
     <a href="mailto:losseni.zouri@etu.u-paris.fr">Email</a>
+    <a href="tel:+33745995084">Téléphone</a>
     <a href="https://www.linkedin.com/in/losseni-zouri-160716253/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://github.com/Losseni-ZOURI" target="_blank" rel="noopener">GitHub</a>
-  </div>
+  </nav>
 </footer>
-
+ 
 <script>
   // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Form → mailto
-  function handleSubmit(e) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+ 
+  // Contact form → mailto
+  function sendMsg(e) {
     e.preventDefault();
-    const name    = document.getElementById('name').value;
-    const email   = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    window.location.href = `mailto:losseni.zouri@etu.u-paris.fr?subject=${encodeURIComponent(subject || 'Contact portfolio')}&body=${encodeURIComponent('De: ' + name + ' <' + email + '>\n\n' + message)}`;
-    document.getElementById('form-success').style.display = 'block';
+    const n = document.getElementById('c-name').value;
+    const em = document.getElementById('c-email').value;
+    const s = document.getElementById('c-subject').value;
+    const m = document.getElementById('c-msg').value;
+    window.location.href = `mailto:losseni.zouri@etu.u-paris.fr?subject=${encodeURIComponent(s||'Contact portfolio')}&body=${encodeURIComponent('De: '+n+' <'+em+'>\n\n'+m)}`;
+    document.getElementById('form-ok').style.display = 'block';
     e.target.reset();
   }
 </script>
 </body>
 </html>
+ 
+
+
+
+
+
+
+
+
+
