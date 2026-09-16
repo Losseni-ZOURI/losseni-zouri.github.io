@@ -1,0 +1,78 @@
+# Losseni ZOURI — Portfolio
+
+Portfolio personnel (Data Analytics / BUT Science des Données), hébergé sur GitHub Pages.
+
+Direction artistique "Signal" : fond encre profonde, dégradé teal → bleu → violet,
+cartes arrondies, trame de réseau de points en filigrane dans le hero, preuves
+contextualisées plutôt que jauges de compétence arbitraires.
+
+## Structure
+
+```
+/
+├── index.html
+├── robots.txt
+├── sitemap.xml
+├── favicon.svg
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── script.js
+│   ├── images/
+│   │   ├── photo.webp / photo.jpg                    (portrait — WebP + repli JPEG)
+│   │   ├── dashboard-dataviz.webp / .jpg              (visuel du projet Challenge Dataviz 2026)
+│   │   ├── ia-impact-secteurs.webp / .jpg             (visuel du projet Impact de l'IA — pas encore utilisé en carte, gardé pour sa présentation détaillée à venir)
+│   │   └── thumbnail-dataviz.png                      (image de partage Open Graph)
+│   └── docs/
+│       ├── cv-losseni-zouri.pdf
+│       ├── rapport_dataviz_2026.pdf
+│       ├── rapport_IA_impact.pdf
+│       └── rapport_projet_films_python.pdf
+└── README.md
+```
+
+## Sections de la page (`index.html`)
+
+| Ancre          | Contenu                                                                 |
+|----------------|--------------------------------------------------------------------------|
+| `#hero`        | Nom, statut de recherche d'alternance, accroche, CTA projets/contact/CV |
+| `#profil`      | Photo, présentation, 4 informations clés, méthode de travail en 4 étapes |
+| `#parcours`    | Timeline unique : stages, formation, engagement, projet phare, puis un encart « Alternance — à écrire avec vous » qui ouvre sur le contact |
+| `#competences` | 8 cartes outils avec un niveau honnête (Opérationnel / En formation / Notions) et le contexte réel d'utilisation, puis une liste « Méthodes & savoir-être » |
+| `#projets`     | 2 projets phares en fiche de cas repliable (Contexte/Problématique/Données/Méthodologie/Résultat), puis un encart « Prochainement » qui pointe vers les rapports déjà disponibles |
+| `#contact`     | Coordonnées directes + formulaire mailto honnête |
+
+## Déploiement
+
+1. Pousser sur la branche par défaut du dépôt `losseni-zouri.github.io` (`main`).
+2. GitHub Pages republie automatiquement en 30 s à 2 min.
+
+## À vérifier après mise en ligne
+
+- Ouvrir la page et vérifier dans les DevTools (onglet Network ou Console) qu'aucune
+  ressource ne renvoie une erreur 404 — CSS, JS, images et PDF doivent tous se charger
+  depuis `assets/...` (`https://losseni-zouri.github.io/assets/css/style.css`, etc.).
+- Lighthouse (Performance / Accessibilité / SEO / Bonnes pratiques) — viser 90+ partout.
+- Menu mobile (bouton hamburger) : ouverture/fermeture, clic extérieur, touche Échap.
+- Que `og:image` s'affiche bien en partageant le lien sur LinkedIn / WhatsApp.
+- Que les rapports PDF, le détail des projets (`<details>`) et le formulaire de
+  contact fonctionnent, y compris au clavier.
+
+## Mettre à jour un projet
+
+Chaque projet est un bloc `<article class="project-card">` dans la section `#projets`
+de `index.html`. Il contient un en-tête (eyebrow/titre/description/tags), un visuel,
+puis un bloc repliable `<details class="project-case">` structuré en Contexte /
+Problématique / Données / Méthodologie / Résultat / Ce que j'en retiens
+(balise `<dl class="case-grid">`). Pour promouvoir un projet actuellement dans
+l'encart « Prochainement » (SQL, IA/R, Python) en carte complète : dupliquer un bloc
+`project-card`, réutiliser son rapport PDF déjà présent dans `assets/docs/`, puis
+retirer sa mention de l'encart `.projects-note`.
+
+## Mettre à jour la timeline (Parcours)
+
+Chaque étape est un `.timeline-item` dans `#parcours`. L'encart final
+`.timeline-item--active` (fond teal en tirets) représente le poste d'alternance
+recherché : ne pas le supprimer, c'est l'appel à l'action de toute la section —
+seules ses dates doivent être ajustées si la recherche évolue.
