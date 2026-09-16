@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initContactForm();
   initMobileNav();
+  initStatCounters();
 });
 
 /**
@@ -67,6 +68,48 @@ function initContactForm() {
     }
     form.reset();
   });
+}
+
+/**
+ * Anime les chiffres clés de 0 jusqu'à leur valeur réelle au moment où ils
+ * entrent dans le viewport. Les valeurs sont de vraies données du portfolio
+ * (nombre de projets, de stages...), pas des métriques inventées.
+ */
+function initStatCounters() {
+  const counters = document.querySelectorAll('.stat-value[data-count-to]');
+  if (!counters.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    counters.forEach(el => { el.textContent = el.dataset.countTo; });
+    return;
+  }
+
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.countTo, 10);
+    if (!Number.isFinite(target)) return;
+    const duration = 900;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  counters.forEach(el => io.observe(el));
 }
 
 /**
