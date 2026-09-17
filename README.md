@@ -50,6 +50,18 @@ contextualisées plutôt que jauges de compétence arbitraires.
 1. Pousser sur la branche par défaut du dépôt `losseni-zouri.github.io` (`main`).
 2. GitHub Pages republie automatiquement en 30 s à 2 min.
 
+### Cache navigateur — important
+
+`index.html` charge `style.css` et `script.js` avec un paramètre de version
+(`?v=20260917`). GitHub Pages garde la même URL à chaque mise à jour, donc sans ce
+paramètre les navigateurs qui ont déjà visité le site peuvent continuer à utiliser
+une ancienne version en cache du CSS/JS après un déploiement, ce qui casse
+l'affichage (icônes non stylées, etc.) sans que ça se voie dans un test « à froid ».
+**À chaque modification de `style.css` ou `script.js`, changer cette valeur** (par
+exemple la date du jour) dans les deux balises `<link>` et `<script>` de
+`index.html`, sinon les visiteurs récurrents ne verront pas la mise à jour tant que
+leur cache n'expire pas naturellement.
+
 ## À vérifier après mise en ligne
 
 - Ouvrir la page et vérifier dans les DevTools (onglet Network ou Console) qu'aucune
