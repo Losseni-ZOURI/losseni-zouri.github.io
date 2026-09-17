@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/css/style.css?v=20260917" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260917b" />
 
 <script type="application/ld+json">
 {
@@ -443,11 +443,18 @@
 
         <!-- Projet 1 -->
         <article class="card project-card reveal" id="projet-dataviz">
-          <div class="project-media">
-            <picture>
-              <source srcset="assets/images/dashboard-dataviz.webp" type="image/webp" />
-              <img src="assets/images/dashboard-dataviz.jpg" alt="Dashboard Power BI comparant l'évolution démographique des régions françaises entre 2016 et 2022" loading="lazy" decoding="async" width="1660" height="960" />
-            </picture>
+          <div class="project-media project-media--partners">
+            <div class="partner-item">
+              <span class="partner-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 3 2 8 12 13 22 8 12 3"/><path d="M6 10v4c0 1.5 2.5 3 6 3s6-1.5 6-3v-4"/><line x1="22" y1="8" x2="22" y2="14"/></svg></span>
+              <p class="partner-name">Université Paris Cité</p>
+              <p class="partner-sub">IUT de Paris – Rives de Seine</p>
+            </div>
+            <span class="partner-divider" aria-hidden="true"></span>
+            <div class="partner-item">
+              <span class="partner-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span>
+              <p class="partner-name">INSEE</p>
+              <p class="partner-sub">Données &amp; partenariat</p>
+            </div>
           </div>
           <span class="project-badge project-badge--univ">Universitaire</span>
           <h3 class="project-name">Challenge Dataviz 2026</h3>
@@ -465,6 +472,13 @@
           </div>
           <details class="project-case">
             <summary>Voir le détail du projet</summary>
+            <figure class="case-figure">
+              <picture>
+                <source srcset="assets/images/dashboard-dataviz.webp" type="image/webp" />
+                <img src="assets/images/dashboard-dataviz.jpg" alt="Dashboard Power BI comparant l'évolution démographique des régions françaises entre 2016 et 2022" loading="lazy" decoding="async" width="1660" height="960" />
+              </picture>
+              <figcaption>Dashboard Power BI produit pour le challenge.</figcaption>
+            </figure>
             <dl class="case-grid">
               <dt>Contexte</dt>
               <dd>Challenge national organisé par l'Université Paris Cité en partenariat avec l'INSEE, réalisé en une journée en équipe de 4.</dd>
@@ -484,12 +498,13 @@
 
         <!-- Projet 2 -->
         <article class="card project-card reveal">
-          <div class="project-media project-media--stats">
-            <ul class="stat-trio">
-              <li><strong>627</strong><span>répondant·e·s</span></li>
-              <li><strong>233</strong><span>profils analysés</span></li>
-              <li><strong>0</strong><span>liaison significative</span></li>
-            </ul>
+          <div class="project-media project-media--solo">
+            <span class="project-media-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="16" cy="12" r="6"/></svg></span>
+            <div class="partner-item">
+              <span class="partner-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 3 2 8 12 13 22 8 12 3"/><path d="M6 10v4c0 1.5 2.5 3 6 3s6-1.5 6-3v-4"/><line x1="22" y1="8" x2="22" y2="14"/></svg></span>
+              <p class="partner-name">Université Paris Cité</p>
+              <p class="partner-sub">IUT de Paris – Rives de Seine</p>
+            </div>
           </div>
           <span class="project-badge project-badge--univ">Universitaire</span>
           <h3 class="project-name">Genre et expérience professionnelle</h3>
@@ -507,6 +522,11 @@
           </div>
           <details class="project-case">
             <summary>Voir le détail du projet</summary>
+            <ul class="case-stats">
+              <li><strong>627</strong><span>répondant·e·s</span></li>
+              <li><strong>233</strong><span>profils analysés</span></li>
+              <li><strong>0</strong><span>liaison significative</span></li>
+            </ul>
             <dl class="case-grid">
               <dt>Contexte</dt>
               <dd>Enquête menée en groupe de 4 (Losseni ZOURI, Nassim GOUMBRA, Njaka RAKOTOBE, Claire VILLIERS) auprès des étudiant·e·s de l'IUT de Paris – Rives de Seine, collecte en ligne le 21 janvier 2026.</dd>
@@ -526,12 +546,13 @@
 
         <!-- Projet 3 -->
         <article class="card project-card reveal">
-          <div class="project-media project-media--stats">
-            <ul class="stat-trio">
-              <li><strong>112,55 €</strong><span>dépense moyenne</span></li>
-              <li><strong>26,78</strong><span>locations / client</span></li>
-              <li><strong>43</strong><span>films jamais loués</span></li>
-            </ul>
+          <div class="project-media project-media--solo">
+            <span class="project-media-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <div class="partner-item">
+              <span class="partner-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 3 2 8 12 13 22 8 12 3"/><path d="M6 10v4c0 1.5 2.5 3 6 3s6-1.5 6-3v-4"/><line x1="22" y1="8" x2="22" y2="14"/></svg></span>
+              <p class="partner-name">Université Paris Cité</p>
+              <p class="partner-sub">IUT de Paris – Rives de Seine</p>
+            </div>
           </div>
           <span class="project-badge project-badge--univ">Universitaire</span>
           <h3 class="project-name">Analyse fictive des données d'un loueur de DVD</h3>
@@ -549,6 +570,11 @@
           </div>
           <details class="project-case">
             <summary>Voir le détail du projet</summary>
+            <ul class="case-stats">
+              <li><strong>112,55 €</strong><span>dépense moyenne</span></li>
+              <li><strong>26,78</strong><span>locations / client</span></li>
+              <li><strong>43</strong><span>films jamais loués</span></li>
+            </ul>
             <dl class="case-grid">
               <dt>Contexte</dt>
               <dd>Exercice universitaire en groupe de 3, construit autour d'un scénario fictif de réouverture d'un espace de location de DVD, à partir de la base Sakila (loueur de DVD réel, 2005) fournie par l'IUT.</dd>
@@ -568,12 +594,13 @@
 
         <!-- Projet 4 -->
         <article class="card project-card reveal">
-          <div class="project-media project-media--stats">
-            <ul class="stat-trio">
-              <li><strong>2020–25</strong><span>période étudiée</span></li>
-              <li><strong>3</strong><span>axes d'analyse</span></li>
-              <li><strong>Dispersée</strong><span>corrélation IA/CA</span></li>
-            </ul>
+          <div class="project-media project-media--solo">
+            <span class="project-media-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="6" y2="17"/><line x1="12" y1="7" x2="18" y2="17"/><line x1="6" y1="19" x2="18" y2="19"/></svg></span>
+            <div class="partner-item">
+              <span class="partner-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 3 2 8 12 13 22 8 12 3"/><path d="M6 10v4c0 1.5 2.5 3 6 3s6-1.5 6-3v-4"/><line x1="22" y1="8" x2="22" y2="14"/></svg></span>
+              <p class="partner-name">Université Paris Cité</p>
+              <p class="partner-sub">IUT de Paris – Rives de Seine</p>
+            </div>
           </div>
           <span class="project-badge project-badge--univ">Universitaire</span>
           <h3 class="project-name">Impact de l'IA sur les secteurs d'activité</h3>
@@ -591,6 +618,11 @@
           </div>
           <details class="project-case">
             <summary>Voir le détail du projet</summary>
+            <ul class="case-stats">
+              <li><strong>2020–25</strong><span>période étudiée</span></li>
+              <li><strong>3</strong><span>axes d'analyse</span></li>
+              <li><strong>Dispersée</strong><span>corrélation IA/CA</span></li>
+            </ul>
             <dl class="case-grid">
               <dt>Contexte</dt>
               <dd>SAE réalisée en groupe de 3 (Claire VILLIERS, Mellissa FRENDI, Losseni ZOURI), IUT de Paris – Rives de Seine.</dd>
@@ -712,6 +744,6 @@
   </nav>
 </footer>
 
-<script src="assets/js/script.js?v=20260917"></script>
+<script src="assets/js/script.js?v=20260917b"></script>
 </body>
 </html>
