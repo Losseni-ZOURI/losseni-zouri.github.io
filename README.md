@@ -22,11 +22,13 @@ contextualisées plutôt que jauges de compétence arbitraires.
 │   ├── images/
 │   │   ├── photo.webp / photo.jpg                    (portrait — WebP + repli JPEG)
 │   │   ├── dashboard-dataviz.webp / .jpg              (visuel du projet Challenge Dataviz 2026)
-│   │   ├── ia-impact-secteurs.webp / .jpg             (visuel du projet Impact de l'IA — pas encore utilisé en carte, gardé pour sa présentation détaillée à venir)
+│   │   ├── ia-impact-secteurs.webp / .jpg             (non utilisée en carte — le projet Impact de l'IA affiche un bandeau de chiffres clés à la place)
 │   │   └── thumbnail-dataviz.png                      (image de partage Open Graph)
 │   └── docs/
 │       ├── cv-losseni-zouri.pdf
 │       ├── rapport_dataviz_2026.pdf
+│       ├── rapport_enquete_genre_experience_pro.pdf
+│       ├── rapport_loueur_dvd.pdf
 │       ├── rapport_IA_impact.pdf
 │       └── rapport_projet_films_python.pdf
 └── README.md
@@ -40,7 +42,7 @@ contextualisées plutôt que jauges de compétence arbitraires.
 | `#profil`      | Photo, présentation, 4 informations clés, méthode de travail en 4 étapes |
 | `#parcours`    | Timeline unique : stages, formation, engagement, projet phare, puis un encart « Alternance — à écrire avec vous » qui ouvre sur le contact |
 | `#competences` | 8 cartes outils avec un niveau honnête (Opérationnel / En formation / Notions) et le contexte réel d'utilisation, puis une liste « Méthodes & savoir-être » |
-| `#projets`     | 2 projets phares en fiche de cas repliable (Contexte/Problématique/Données/Méthodologie/Résultat), puis un encart « Prochainement » qui pointe vers les rapports déjà disponibles |
+| `#projets`     | 4 projets en fiche de cas repliable (Contexte/Problématique/Données/Méthodologie/Résultat), un bandeau de chiffres clés réels en visuel de carte, puis un encart « Prochainement » qui pointe vers le rapport déjà disponible du projet restant |
 | `#contact`     | Coordonnées directes + formulaire mailto honnête |
 
 ## Déploiement
@@ -62,13 +64,15 @@ contextualisées plutôt que jauges de compétence arbitraires.
 ## Mettre à jour un projet
 
 Chaque projet est un bloc `<article class="project-card">` dans la section `#projets`
-de `index.html`. Il contient un en-tête (eyebrow/titre/description/tags), un visuel,
-puis un bloc repliable `<details class="project-case">` structuré en Contexte /
-Problématique / Données / Méthodologie / Résultat / Ce que j'en retiens
-(balise `<dl class="case-grid">`). Pour promouvoir un projet actuellement dans
-l'encart « Prochainement » (SQL, IA/R, Python) en carte complète : dupliquer un bloc
-`project-card`, réutiliser son rapport PDF déjà présent dans `assets/docs/`, puis
-retirer sa mention de l'encart `.projects-note`.
+de `index.html`. Il contient un visuel (image réelle dans `.project-media`, ou un
+bandeau `.project-media--stats` avec 3 chiffres clés réels quand il n'y a pas encore
+de capture), un badge de catégorie, un titre/description/tags, un bouton d'action
+(rapport PDF ou « Rapport à venir »), puis un bloc repliable `<details
+class="project-case">` structuré en Contexte / Problématique / Données /
+Méthodologie / Résultat / Ce que j'en retiens (balise `<dl class="case-grid">`).
+Pour promouvoir le projet Python actuellement dans l'encart « Prochainement » en
+carte complète : dupliquer un bloc `project-card`, réutiliser son rapport PDF déjà
+présent dans `assets/docs/`, puis retirer sa mention de l'encart `.projects-note`.
 
 ## Mettre à jour la timeline (Parcours)
 
