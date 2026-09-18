@@ -22,8 +22,10 @@ contextualisées plutôt que jauges de compétence arbitraires.
 │   ├── images/
 │   │   ├── photo.webp / photo.jpg                    (portrait — WebP + repli JPEG)
 │   │   ├── dashboard-dataviz.webp / .jpg              (visuel du projet Challenge Dataviz 2026)
-│   │   ├── ia-impact-secteurs.webp / .jpg             (non utilisée en carte — le projet Impact de l'IA affiche un bandeau de chiffres clés à la place)
-│   │   └── thumbnail-dataviz.png                      (image de partage Open Graph)
+│   │   ├── impact-ia-cover.webp / .jpg                (visuel du projet Impact de l'IA — couverture de la SAE, noms des coéquipiers retirés)
+│   │   ├── thumbnail-dataviz.png                      (image de partage Open Graph)
+│   │   └── logos/
+│   │       └── upc-iut-logo.webp / .jpg               (logo réel IUT de Paris – Rives de Seine / Université Paris Cité, affiché en petit badge sur chaque carte projet)
 │   └── docs/
 │       ├── cv-losseni-zouri.pdf
 │       ├── rapport_dataviz_2026.pdf
@@ -76,15 +78,24 @@ leur cache n'expire pas naturellement.
 ## Mettre à jour un projet
 
 Chaque projet est un bloc `<article class="project-card">` dans la section `#projets`
-de `index.html`. Il contient un visuel (image réelle dans `.project-media`, ou un
-bandeau `.project-media--stats` avec 3 chiffres clés réels quand il n'y a pas encore
-de capture), un badge de catégorie, un titre/description/tags, un bouton d'action
-(rapport PDF ou « Rapport à venir »), puis un bloc repliable `<details
-class="project-case">` structuré en Contexte / Problématique / Données /
-Méthodologie / Résultat / Ce que j'en retiens (balise `<dl class="case-grid">`).
+de `index.html`. Il contient :
+
+- un visuel `.project-media` — une vraie capture/photo quand elle existe, sinon un
+  graphique de données réel `.project-media--chart` (SVG inline construit à partir
+  des vrais chiffres du rapport, jamais un motif décoratif générique) ;
+- une ligne `.project-meta` avec le petit badge logo réel (`.project-logo-chip`,
+  toujours sur fond blanc car le logo est prévu pour ça) et un badge de catégorie ;
+- titre, description, tags, un bouton d'action (rapport PDF ou « Rapport à venir ») ;
+- un bloc repliable `<details class="project-case">` structuré en Contexte /
+  Problématique / Données / Méthodologie / Résultat / Ce que j'en retiens
+  (`<dl class="case-grid">`), précédé pour certains projets d'une rangée de
+  chiffres clés `<ul class="case-stats">`.
+
 Pour promouvoir le projet Python actuellement dans l'encart « Prochainement » en
 carte complète : dupliquer un bloc `project-card`, réutiliser son rapport PDF déjà
 présent dans `assets/docs/`, puis retirer sa mention de l'encart `.projects-note`.
+S'il n'y a pas de capture d'écran disponible, construire un `.project-media--chart`
+à partir d'un vrai chiffre du rapport plutôt que d'inventer un visuel.
 
 ## Mettre à jour la timeline (Parcours)
 

@@ -401,37 +401,18 @@ section { padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1.5rem, 5vw, 4rem); }
 .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.35rem; }
 .project-tag { font-family: var(--mono); font-size: 0.68rem; font-weight: 500; padding: 0.28rem 0.65rem; border-radius: var(--radius-sm); background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(45,216,190,0.3); }
 
-.project-media { border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.1rem; background: var(--surface-2); min-height: 190px; }
+.project-media { border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1rem; background: var(--surface-2); min-height: 190px; }
 .project-media img { width: 100%; height: 100%; object-fit: cover; }
-/* Bandeau de logos : fond clair volontaire (comme la référence) car les
-   identités visuelles des partenaires sont conçues pour un fond blanc. */
-.project-media--partners, .project-media--solo {
-  min-height: 190px;
-  background: #F6F5F2;
+.project-media--chart { display: flex; align-items: center; justify-content: center; padding: 0.5rem; }
+.project-media--chart svg { width: 100%; height: auto; }
+
+.project-meta { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.9rem; flex-wrap: wrap; }
+.project-logo-chip {
+  display: inline-flex; align-items: center;
+  background: #FFFFFF; border-radius: var(--radius-sm);
+  padding: 0.3rem 0.55rem; line-height: 0;
 }
-.project-media--partners { display: flex; align-items: stretch; }
-.project-media--solo { position: relative; display: flex; align-items: center; justify-content: center; }
-
-.partner-item { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.85rem; padding: 1rem 1.35rem; }
-.partner-mark { flex-shrink: 0; width: 34px; height: 34px; }
-.partner-mark svg { width: 100%; height: 100%; }
-.partner-name { font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; line-height: 1.2; text-align: left; }
-.partner-name span { display: block; font-family: var(--sans); font-weight: 500; font-size: 0.72rem; opacity: 0.75; }
-.partner-item--insee .partner-name { color: #0B4C8C; letter-spacing: 0.02em; }
-
-.upc-wordmark { color: #1A1A1A; }
-.upc-wordmark strong { display: block; }
-.upc-wordmark em { font-style: normal; color: #7A1638; }
-.upc-sub { font-family: var(--sans); font-weight: 500; font-size: 0.72rem; color: #1A1A1A; opacity: 0.7; margin-top: 0.1rem; }
-.partner-divider { width: 1px; background: #DBD8D2; margin: 1.5rem 0; }
-
-.project-media-icon {
-  position: absolute; top: 0.85rem; right: 0.85rem;
-  width: 34px; height: 34px; border-radius: 50%;
-  background: var(--surface); border: 1px solid var(--border-lt);
-  display: flex; align-items: center; justify-content: center; color: var(--teal);
-}
-.project-media-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.project-logo-chip img { height: 22px; width: auto; display: block; }
 
 .case-figure { margin: 0 0 1.1rem; }
 .case-figure img { width: 100%; height: auto; border-radius: var(--radius-md); display: block; }
@@ -443,9 +424,8 @@ section { padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1.5rem, 5vw, 4rem); }
 .case-stats span { font-family: var(--mono); font-size: 0.6rem; color: var(--mist); text-transform: uppercase; letter-spacing: 0.01em; }
 
 .project-badge {
-  align-self: flex-start;
   font-family: var(--mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-  padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); margin-bottom: 0.9rem;
+  padding: 0.3rem 0.65rem; border-radius: var(--radius-sm);
 }
 .project-badge--univ { background: var(--teal-dim); color: var(--teal); }
 .project-badge--perso { background: rgba(240,169,78,0.14); color: var(--amber); }
